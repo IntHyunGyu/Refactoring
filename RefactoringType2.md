@@ -95,32 +95,32 @@
   * ~~~ java
     private void checkEffact(List<BeforeCutVo2> befores, int cut, int time) {
     		String effactName;
-        effactName = effectName.toLowerCase();
-    		effectName = befores.get(cut).effect.getEcName();
+    		effactName = effectName.toLowerCase();
     
     		switch (effactName) {
     		case "blink":
     			System.out.println(befores.get(cut).effect.now++ + "번 깜박임");
     			break;
-    		case "vibration":
+    		case "vibration": {
     			int key = time % 4;
-                 	switch(key) {
-                        case 0 : 
-                            befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
-                            break;
-                        case 1 : befores.get(cut).effact.sLocation.x += 3;                                          befores.get(cut).effact.sLocation.y +=3; 
-                            break;
-                        case 2 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y +=3; 
-                            break;
-                        case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
-                            break;
-                    }
+             	switch(key) {
+                    case 0 : 
+                        befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
+                        break;
+                    case 1 : befores.get(cut).effact.sLocation.x += 3;                                          befores.get(cut).effact.sLocation.y +=3; 
+                        break;
+                    case 2 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y +=3; 
+                        break;
+                    case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
+                        break;
+                }
     			System.out.println("진동 진행 후 위치 : [x=" + befores.get(cut).effact.sLocation.x + ", y=" + befores.get(cut).effact.sLocation.y + "]");
     			break;
+    		}
     		case "wiggle":
     			System.out.println(befores.get(cut).effect.now + 10 + "%");
     			break;
-    		case "zoominout":
+    		case "zoominout": {
     			int weight = 0;
     			String type;
     			type = befores.get(cut).effact.getType();
@@ -129,14 +129,17 @@
     			} else if("subtract".equals(type)) {
     				weight = -10/100;
     			}
-    			
-    			System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effact.sLocation.width*weight + ", height="
-    					+ befores.get(cut).effact.sLocation.height*weight + "]");
     		}
-    ~~~
-
+    			
+    		System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effact.sLocation.width*weight + ", height="
+    				+ befores.get(cut).effact.sLocation.height*weight + "]");
+    		}
+	}
+    }
+  ~~~
+    
   * **여러 기능**의 메소드
-
+  
     * 메소드는 **하나의 메소드**당 **하나의 기능**을 하는것이 적절하다. 그러나 각 효과를 구분하고 처리 하는 메소드를 하나씩 메소드를 만드는것은 굉장히 시간이 낭비되고 메모리가 낭비된다.
     
     * 이 메소드도 효과가 무었인지 check하기 위한 용도지만 check는 물론이고 효과 계산, 출력등 **너무 많은 기능**들을 처리하고 있어 잘못된 방법이라고 볼수있다.
@@ -163,13 +166,15 @@
     		this.length = eTime-sTime+1;
     		this.sLocation = sLocation;
     	}
+    	
         ...
+        
         public abstract int getResult(int key);
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
-    }
+  }
     ~~~
-
+    
   * 공통 변수
 
     * 각 효과들이 공통적으로 사용하는 변수만 선언하였다.
@@ -182,37 +187,37 @@
 
   * ~~~ java
     private List<BeforeCutVo> SettingBefores(int caseNum) {
-    		if (caseNum == 1) {
-    			List<BeforeCutVo> befores = new ArrayList<BeforeCutVo>();
-    			BeforeCutVo before1 = new BeforeCutVo();
-    			BeforeCutVo before2 = new BeforeCutVo();
-    			BeforeCutVo before3 = new BeforeCutVo();
+    	if (caseNum == 1) {
+    		List<BeforeCutVo> befores = new ArrayList<BeforeCutVo>();
+    		BeforeCutVo before1 = new BeforeCutVo();
+    		BeforeCutVo before2 = new BeforeCutVo();
+    		BeforeCutVo before3 = new BeforeCutVo();
     
-    			// 첫번째 장면
-    			before1.setPk(1);
-    			before1.setsTime(1);
-    			before1.seteTime(10);
-    			before1.setLocation("A");
-    			// 장면시작 ScaleUp
-    			SCScaleUp scaleup = new SCScaleUp(1, 3, before1.getLocation(), 5, 5);
-    			before1.setStartSecenChange(scaleup);
-    			// 장면종료 move
-    			SCMove move = new SCMove(8, 10, before1.getLocation(), 10, -10);
-    			before1.setEndSecenChange(move);
-    			// 효과 Blink
-    			EFBlink blink = new EFBlink(4, 5, before1.getLocation(), 1);
-    			before1.setEffect(blink);
+    		// 첫번째 장면
+    		before1.setPk(1);
+    		before1.setsTime(1);
+    		before1.seteTime(10);
+    		before1.setLocation("A");
+    		// 장면시작 ScaleUp
+    		SCScaleUp scaleup = new SCScaleUp(1, 3, before1.getLocation(), 5, 5);
+    		before1.setStartSecenChange(scaleup);
+    		// 장면종료 move
+    		SCMove move = new SCMove(8, 10, before1.getLocation(), 10, -10);
+    		before1.setEndSecenChange(move);
+    		// 효과 Blink
+    		EFBlink blink = new EFBlink(4, 5, before1.getLocation(), 1);
+    		before1.setEffect(blink);
+            
+    		...
                 
-    			...
-                    
-                befores.add(before1);
-                befores.add(before2);
-                befores.add(before3);
+            befores.add(before1);
+            befores.add(before2);
+            befores.add(before3);
     
-                return befores;
-            }
-        	return null;
-    	}
+            return befores;
+        }
+    	return null;
+    }
     ~~~
 
   * 가독성 ↑
@@ -223,25 +228,25 @@
 
   * ~~~ java
     private void checkEffact(List<BeforeCutVo> befores, String effactName, int cut, int time) {
-    		effactName = effectName.toLowerCase();
+    	effactName = effectName.toLowerCase();
     
-    		switch (effactName) {
-    		case "blink":
-    			System.out.println(befores.get(cut).effact.getResult(1) + "번 깜박임");
-    			break;
-    		case "vibration":
-    			Rect nowLocation = befores.get(cut).effact.returnLocation(time % 4);
-    			System.out.println("진동 진행 후 위치 : [x=" + nowLocation.x + ", y=" + nowLocation.y + "]");
-    			break;
-    		case "wiggle":
-    			System.out.println(befores.get(cut).effact.getResult(1) + "%");
-    			break;
-    		case "zoominout":
-    			System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effect.returnLocation(0).width + ", height="
-    					+ befores.get(cut).effect.returnLocation(1).height + "]");
-    		}
-    
+    	switch (effactName) {
+    	case "blink":
+    		System.out.println(befores.get(cut).effact.getResult(1) + "번 깜박임");
+    		break;
+    	case "vibration": 
+    		Rect nowLocation = befores.get(cut).effact.returnLocation(time % 4);
+    		System.out.println("진동 진행 후 위치 : [x=" + nowLocation.x + ", y=" + nowLocation.y + "]");
+    		break;
+    	case "wiggle":
+    		System.out.println(befores.get(cut).effact.getResult(1) + "%");
+    		break;
+    	case "zoominout":
+    		System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effect.returnLocation(0).width + ", height="
+    				+ befores.get(cut).effect.returnLocation(1).height + "]");
     	}
+    
+    }
     ~~~
 
   * 여러 기능에 메소드
@@ -272,7 +277,9 @@
     		this.length = eTime-sTime+1;
     		this.sLocation = sLocation;
     	}
+    	
         ...
+        
         public abstract void setting(int key);
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
@@ -293,25 +300,36 @@
     import org.opencv.core.Rect;
     
     public class EFVibrate extends effact {
-    	
+    
     	int vibration;
-    	
+    
     	public EFVibrate(int sTime, int eTime, Rect sLocation, int vibration) {
     		super(sTime, eTime, sLocation);
     		this.vibration = vibration;
     	}
-    	
-    	
+    
     	@Override
     	public void setting(int key) {
-    		switch(key) {
-    			case 0 : this.sLocation.x -= 3; this.sLocation.y -=3; break;
-    			case 1 : this.sLocation.x += 3; this.sLocation.y +=3; break;
-    			case 2 : this.sLocation.x -= 3; this.sLocation.y +=3; break;
-    			case 3 : this.sLocation.x -= 3; this.sLocation.y -=3; break;
+    		switch (key) {
+    		case 0:
+    			this.sLocation.x -= 3;
+    			this.sLocation.y -= 3;
+    			break;
+    		case 1:
+    			this.sLocation.x += 3;
+    			this.sLocation.y += 3;
+    			break;
+    		case 2:
+    			this.sLocation.x -= 3;
+    			this.sLocation.y += 3;
+    			break;
+    		case 3:
+    			this.sLocation.x -= 3;
+    			this.sLocation.y -= 3;
+    			break;
     		}
     	}
-    	
+    
     	@Override
     	public String getEFName() {
     		return "vibration";
@@ -321,11 +339,11 @@
     	public Rect returnLocation(int key) {
     		return null;
     	}
-        
-        @override
-        public void print() {
-            System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
-        }
+    
+    	@override
+    	public void print() {
+    		System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
+    	}
     
     }
     ~~~
@@ -337,34 +355,34 @@
   * 추상화를 적용하기 전 효과 출력 메소드
     
     ~~~ java
-    rivate void checkEffact(List<BeforeCutVo2> befores, int cut, int time) {
+    private void checkEffact(List<BeforeCutVo2> befores, int cut, int time) {
     		String effactName;
-    effactName = effectName.toLowerCase();
-    		effectName = befores.get(cut).effect.getEcName();
-  
-    		switch (effactName) {
+		effactName = effectName.toLowerCase();
+    
+  		switch (effactName) {
     		case "blink":
     			System.out.println(befores.get(cut).effect.now++ + "번 깜박임");
     			break;
-    		case "vibration":
+    		case "vibration": {
     			int key = time % 4;
-                 	switch(key) {
-                        case 0 : 
-                            befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
-                            break;
-                        case 1 : befores.get(cut).effact.sLocation.x += 3;                                          befores.get(cut).effact.sLocation.y +=3; 
-                            break;
-                        case 2 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y +=3; 
-                            break;
-                        case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
-                            break;
-                    }
+             	switch(key) {
+                    case 0 : 
+                        befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
+                        break;
+                    case 1 : befores.get(cut).effact.sLocation.x += 3;                                          befores.get(cut).effact.sLocation.y +=3; 
+                        break;
+                    case 2 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y +=3; 
+                        break;
+                    case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
+                        break;
+                }
     			System.out.println("진동 진행 후 위치 : [x=" + befores.get(cut).effact.sLocation.x + ", y=" + befores.get(cut).effact.sLocation.y + "]");
     			break;
+    		}
     		case "wiggle":
     			System.out.println(befores.get(cut).effect.now + 10 + "%");
     			break;
-    		case "zoominout":
+    		case "zoominout": {
     			int weight = 0;
     			String type;
     			type = befores.get(cut).effact.getType();
@@ -373,10 +391,13 @@
     			} else if("subtract".equals(type)) {
     				weight = -10/100;
     			}
-    			
-    			System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effact.sLocation.width*weight + ", height="
-    					+ befores.get(cut).effact.sLocation.height*weight + "]");
     		}
+    			
+    		System.out.println("진행 후 보여지는 크기 [width=" + befores.get(cut).effact.sLocation.width*weight + ", height="
+    				+ befores.get(cut).effact.sLocation.height*weight + "]");
+    		}
+    	}
+    }
     ~~~
     
   * 추상화를 적용한 후 효과 출력 메소드
