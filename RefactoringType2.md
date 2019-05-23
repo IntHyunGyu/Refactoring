@@ -18,27 +18,27 @@
 * 효과 정보 Vo
 
   * ~~~ java
-    public class BeforeEffact {
-    	int sTime;
-    	int eTime;
-    	int length;
-    	Rect sLocation;
-    	int now;
-    	int size;
-    	String ecName;
-    
-    	public BeforeEffact(int sTime, int eTime, int length, Rect sLocation, int now, int size, String ecName) {
-    		super();
-    		this.sTime = sTime;
-    		this.eTime = eTime;
-    		this.length = length;
-    		this.sLocation = sLocation;
-    		this.now = now;
-    		this.size = size;
-    		this.ecName = ecName;
-    	}
-        ...
-    }
+   public class BeforeEffact {
+	int sTime;
+	int eTime;
+	int length;
+	Rect sLocation;
+	int now;
+	int size;
+	String ecName;
+
+	public BeforeEffact(int sTime, int eTime, int length, Rect sLocation, int now, int size, String ecName) {
+		super();
+		this.sTime = sTime;
+		this.eTime = eTime;
+		this.length = length;
+		this.sLocation = sLocation;
+		this.now = now;
+		this.size = size;
+		this.ecName = ecName;
+	}
+    ...
+}
     ~~~
 
   * **불필요한 변수**들	
