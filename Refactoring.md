@@ -342,7 +342,9 @@
   * 객체에 공통적인 변수와 메소드를 묶는것
   * 반복되는 코드를 제거 할수있다.
 
-  ![Alt text](C:\Users\Hyun\Pictures\example.png)
+  ![Alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqYOiouoFlcgaSU8BDvzMo_WZo52F3FR3ZQzni8NHx8S4ZlUqZ)
 
 * 후기
+  
   * 이번 리펙토링을 통해 개념만 배웠던 추상화를 어떻게 활용 하는지에 대해 명확히 알게 되었다.
+
