@@ -2,7 +2,8 @@
 
 각 이미지 별로 진행시간, 효과 등을 출력하는 로직을 만들고 있었다.
 
-그 중 효과를 출력 하는 부분에서 각 효과별로 출력되는 내용이 다르고 사용되는 변수들이 다른데 이를 일일히 만들기에는 굉장히 **시간 낭비**인거 같고 또 **중복 코드** 들이 많이 생기게 된다. 이를 해결하기 위해서 Java에 기능 중 하나인 abstract 즉, **추상클래스** 를 활용 하였다.
+그 중 효과를 출력 하는 부분에서 각 효과별로 출력되는 내용이 다르고 사용되는 변수들이 다른데 이를 일일히 만들기에는 굉장히 **시간 낭비**인거 같고 또 **중복 코드** 들이 많이 생기게 된다. 
+이를 해결하기 위해서 Java에 기능 중 하나인 abstract 즉, **추상클래스** 를 활용 하였다.
 
 **추상화**를 사용 하여 얻을수 있는 장점
 
@@ -17,27 +18,27 @@
 * 효과 정보 Vo
 
   * ~~~ java
-    public class BeforeEffact {
-    	int sTime;
-    	int eTime;
-    	int length;
-    	Rect sLocation;
-    	int now;
-    	int size;
-    	String ecName;
-    
-    	public BeforeEffact(int sTime, int eTime, int length, Rect sLocation, int now, int size, String ecName) {
-    		super();
-    		this.sTime = sTime;
-    		this.eTime = eTime;
-    		this.length = length;
-    		this.sLocation = sLocation;
-    		this.now = now;
-    		this.size = size;
-    		this.ecName = ecName;
-    	}
-        ...
-    }
+   public class BeforeEffact {
+	int sTime;
+	int eTime;
+	int length;
+	Rect sLocation;
+	int now;
+	int size;
+	String ecName;
+
+	public BeforeEffact(int sTime, int eTime, int length, Rect sLocation, int now, int size, String ecName) {
+		super();
+		this.sTime = sTime;
+		this.eTime = eTime;
+		this.length = length;
+		this.sLocation = sLocation;
+		this.now = now;
+		this.size = size;
+		this.ecName = ecName;
+	}
+    ...
+}
     ~~~
 
   * **불필요한 변수**들	
@@ -57,16 +58,13 @@
     			before1.setPk(1);
     			before1.setsTime(1);
     			before1.seteTIme(10);
-    			BeforeEffact effact1 = 
-                    new BeforeEffact(3, 6, 0, null, 1, 1, "Blink", "");
+    			BeforeEffact effact1 = new BeforeEffact(3, 6, 0, null, 1, 1, "Blink", "");
     			effact1.setLocation("A");
     			before1.setEffect(effact1);
-    			BeforeSceneChange startSC = 
-                    new BeforeSceneChange(1, 2, 0, null, 0, 0, "Move");
+    			BeforeSceneChange startSC = new BeforeSceneChange(1, 2, 0, null, 0, 0, "Move");
     			startSC.setLocation("B");
     			before1.setStartSC(startSC);
-    			BeforeSceneChange endSC = 
-                    new BeforeSceneChange(7, 10, 0, null, 0, 0, "Opacity");
+    			BeforeSceneChange endSC = new BeforeSceneChange(7, 10, 0, null, 0, 0, "Opacity");
     			endSC.setLocation("C");
     			before1.setEndSC(endSC);
     			before1.setLocation("D");
@@ -95,14 +93,19 @@
   * ~~~ java
     private void checkEffact(List<BeforeCutVo2> befores, int cut, int time) {
     		String effactName;
+<<<<<<< HEAD
     		effactName = effectName.toLowerCase();
     
+=======
+      effactName = effectName.toLowerCase();
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     		switch (effactName) {
     		case "blink":
     			System.out.println(befores.get(cut).effect.now++ + "번 깜박임");
     			break;
     		case "vibration": {
     			int key = time % 4;
+<<<<<<< HEAD
              	switch(key) {
                     case 0 : 
                         befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
@@ -114,6 +117,18 @@
                     case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
                         break;
                 }
+=======
+       switch(key) {
+             case 0 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y -=3; break;
+             case 1 : 
+                befores.get(cut).effact.sLocation.x += 3; befores.get(cut).effact.sLocation.y +=3; break;
+             case 2 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y +=3; break;
+             case 3 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y -=3; break;
+         }
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     			System.out.println("진동 진행 후 위치 : [x=" + befores.get(cut).effact.sLocation.x + ", y=" + befores.get(cut).effact.sLocation.y + "]");
     			break;
     		}
@@ -168,8 +183,12 @@
     	}
     	
         ...
+<<<<<<< HEAD
         
         public abstract int getResult(int key);
+=======
+     public abstract int getResult(int key);
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
   }
@@ -279,11 +298,15 @@
     	}
     	
         ...
+<<<<<<< HEAD
         
         public abstract void setting(int key);
+=======
+     public abstract void setting(int key);
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
-        public abstract void print();
+     public abstract void print();
     }
     ~~~
   * 변화된 점
@@ -357,14 +380,20 @@
     ~~~ java
     private void checkEffact(List<BeforeCutVo2> befores, int cut, int time) {
     		String effactName;
+<<<<<<< HEAD
 		effactName = effectName.toLowerCase();
     
   		switch (effactName) {
+=======
+      effactName = effectName.toLowerCase();
+    		switch (effactName) {
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     		case "blink":
     			System.out.println(befores.get(cut).effect.now++ + "번 깜박임");
     			break;
     		case "vibration": {
     			int key = time % 4;
+<<<<<<< HEAD
              	switch(key) {
                     case 0 : 
                         befores.get(cut).effact.sLocation.x -= 3; 	                                       befores.get(cut).effact.sLocation.y -=3; 
@@ -376,6 +405,18 @@
                     case 3 : befores.get(cut).effact.sLocation.x -= 3;                                          befores.get(cut).effact.sLocation.y -=3; 
                         break;
                 }
+=======
+       switch(key) {
+             case 0 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y -=3; break;
+             case 1 : 
+                befores.get(cut).effact.sLocation.x += 3; befores.get(cut).effact.sLocation.y +=3; break;
+             case 2 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y +=3; break;
+             case 3 : 
+                befores.get(cut).effact.sLocation.x -= 3; befores.get(cut).effact.sLocation.y -=3; break;
+         }
+>>>>>>> 9e09033d1119ab491e098ccab91cff829d5c9ef3
     			System.out.println("진동 진행 후 위치 : [x=" + befores.get(cut).effact.sLocation.x + ", y=" + befores.get(cut).effact.sLocation.y + "]");
     			break;
     		}
