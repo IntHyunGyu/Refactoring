@@ -169,7 +169,7 @@
     		this.sLocation = sLocation;
     	}
         ...
-          public abstract int getResult(int key);
+            public abstract int getResult(int key);
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
     }
