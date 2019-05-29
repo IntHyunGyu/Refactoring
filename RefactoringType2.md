@@ -327,10 +327,10 @@
     		return null;
     	}
         
-        @Override
-        public void print() {
-            System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
-        }
+            @Override
+            public void print() {
+                System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
+            }
     
     }
     ~~~
