@@ -327,10 +327,10 @@
     		return null;
     	}
         
-        @override
-        public void print() {
-            System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
-        }
+      @override
+      public void print() {
+          System.out.println("진동 진행 후 위치 : [x=" + this.location.x + ", y=" + this.location.y + "]");
+      }
     
     }
     ~~~
@@ -341,7 +341,7 @@
 
   * ~~~ java
     private void checkEffact(int cut) {
-    		befores.get(cut).effact.print();
+    befores.get(cut).effact.print();
     }
     ~~~
 
