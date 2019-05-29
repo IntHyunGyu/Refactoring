@@ -278,10 +278,10 @@
     		this.sLocation = sLocation;
     	}
         ...
-        public abstract void setting(int key);
+      public abstract void setting(int key);
     	public abstract String getEFName();
     	public abstract Rect returnLocation(int key);
-        public abstract void print();
+      public abstract void print();
     }
     ~~~
   * 변화된 점
