@@ -366,3 +366,12 @@
 
   - 이번 리펙토링을 통해 개념만 배웠던 추상화를 어떻게 활용 하는지에 대해 명확히 알게 되었다.
 
+---
+
+### 다형성 예시 문제
+
+#### [2019년 정보처리기사 기출문제 -JAVA(추상화)]
+
+![img](https://user-images.githubusercontent.com/40411714/58530898-644ce680-821b-11e9-9aa5-308db94d339f.png)
+
+정답 :  Sub Object \n Super Object가 출력 됨.
